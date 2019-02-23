@@ -1,11 +1,12 @@
 {
   "name": "json-schema-antd",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "author": "chencheng <daniel_txy@163.com>",
   "description": "json schema for antd",
   "main": "lib/index",
   "scripts": {
-    "build": "babel src --out-dir lib && node-sass src -o lib"
+    "build": "rm -rf ./lib && babel src --out-dir lib && node-sass src -o lib && ./copyResource.sh",
+    "publish": "npm run build && npm publish --registry http://registry.npmjs.org"
   },
   "peerDependencies": {
     "react": ">=16",
