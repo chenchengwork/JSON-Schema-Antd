@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import { shouldRender } from "JSON-Schema-Antd/utils";
+import { shouldRender } from "../../utils";
 import InputColor from './InputColor';
 
 class ColorPicker extends Component {

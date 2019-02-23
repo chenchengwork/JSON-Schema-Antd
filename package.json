@@ -1,6 +1,6 @@
 {
   "name": "json-schema-antd",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "chencheng <daniel_txy@163.com>",
   "description": "json schema for antd",
   "main": "lib/index",
