@@ -1,0 +1,49 @@
+{
+  "name": "JSON-Schema-Antd",
+  "version": "1.0.0",
+  "author": "chencheng <daniel_txy@163.com>",
+  "description": "json schema for antd",
+  "main": "lib/index",
+  "scripts": {
+    "dev": "node ./scripts/dev.js",
+    "build": "babel src --out-dir lib && node-sass src -o lib"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "antd": ">=3.0"
+  },
+  "dependencies": {
+    "ajv": "^5.2.3",
+    "growl": "^1.10.5",
+    "lodash.topath": "^4.5.2",
+    "prop-types": "^15.5.8",
+    "react-color": "^2.17.0",
+    "setimmediate": "^1.0.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
+    "@babel/plugin-proposal-decorators": "^7.3.0",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
+    "@babel/plugin-proposal-function-bind": "^7.2.0",
+    "@babel/plugin-proposal-json-strings": "^7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-syntax-import-meta": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "core-js": "^2.6.5",
+    "node-sass": "^4.11.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenchengwork/JSON-Schema-Antd.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chenchengwork/JSON-Schema-Antd/ssues"
+  },
+  "homepage": "https://github.com/chenchengwork/JSON-Schema-Antd#readme"
+}

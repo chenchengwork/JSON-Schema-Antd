@@ -1,0 +1,34 @@
+{
+  "env": {
+    "production": {
+      "plugins": ["transform-react-remove-prop-types"]
+    }
+  },
+  "presets": [
+    ["@babel/preset-env", {
+      "loose": true,
+      "targets": {
+        "browsers": [
+          "last 2 versions",
+          "ie >= 8"
+        ]
+      },
+      "modules": false,
+      "useBuiltIns": "usage",
+      "debug": false
+    }],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-function-bind",
+    "@babel/plugin-syntax-dynamic-import",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-export-namespace-from",
+    "@babel/plugin-syntax-import-meta",
+    "@babel/plugin-proposal-json-strings"
+  ]
+}
+
