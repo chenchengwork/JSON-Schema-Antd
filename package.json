@@ -1,11 +1,10 @@
 {
   "name": "json-schema-antd",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "chencheng <daniel_txy@163.com>",
   "description": "json schema for antd",
   "main": "lib/index",
   "scripts": {
-    "dev": "node ./scripts/dev.js",
     "build": "babel src --out-dir lib && node-sass src -o lib"
   },
   "peerDependencies": {

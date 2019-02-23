@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react'
 import { Collapse, Icon } from 'antd';
 const Panel = Collapse.Panel;
-import "./ObjectFieldTemplate.scss";
+import "./ObjectFieldTemplate.css";
 /**
  * 默认对象字段的模板
  * @param props
@@ -16,9 +16,6 @@ import "./ObjectFieldTemplate.scss";
  */
 export default function DefaultObjectFieldTemplate(props) {
     const {TitleField, DescriptionField, schema, uiSchema} = props;
-    // console.log("DefaultObjectFieldTemplate->schema->", schema);
-    // console.log("DefaultObjectFieldTemplate->uiSchema->", uiSchema);
-    // console.log(props)
 
     return (
         <span className={"object-field-tpl"} key={props.arrItemIndex || 0}>

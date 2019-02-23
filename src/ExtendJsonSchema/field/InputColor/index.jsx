@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import { Input, Row, Col } from 'antd';
 import SketchPicker from 'react-color/lib/Sketch';
 import {render as reactDomRender, unmountComponentAtNode} from "react-dom";
-import "./index.scss";
+import "./index.css";
 
 const mountDomId = "input-color-id";
 
