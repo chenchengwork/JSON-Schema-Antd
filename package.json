@@ -6,7 +6,7 @@
   "main": "lib/index",
   "scripts": {
     "build": "rm -rf ./lib && babel src --out-dir lib && node-sass src -o lib && ./copyResource.sh",
-    "publish": "npm run build && npm publish --registry http://registry.npmjs.org"
+    "publish": "npm publish --registry http://registry.npmjs.org"
   },
   "peerDependencies": {
     "react": ">=16",
