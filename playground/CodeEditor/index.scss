@@ -1,0 +1,11 @@
+.code-content{
+    //overflow: hidden;
+    position: relative;
+
+    :global{
+        // 控制编辑器提示框宽度
+        .monaco-editor .suggest-widget {
+            width: 230px;
+        }
+    }
+}

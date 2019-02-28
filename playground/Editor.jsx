@@ -1,261 +1,244 @@
 import React, { PureComponent } from 'react';
 import JsonSchemaForm from "../src";
+import CodeEditor from './CodeEditor';
 
+import "antd/lib/card/style";
+import "antd/lib/row/style"
+import "antd/lib/col/style"
+import { Card, Row, Col, Button } from 'antd'
 
-export default class Editor extends PureComponent{
-    onFormDataChange = ({formData}) => {
-        console.log(formData);
+const EnumSampleData = [
+    {
+        label: "mySample",
+        value: require("./samples/mySample")
+    },
+    {
+        label: "Sample",
+        value: require("./samples/sample")
+    },
+    {
+        label: "Nested",
+        value: require("./samples/nested")
+    },
+    {
+        label: "Arrays",
+        value: require("./samples/arrays")
+    },
+];
+
+/**
+ * 通过字符串获取json对象
+ * @param value
+ * @return {{isError: boolean, data: null}}
+ */
+const getJsonByStr = (value) => {
+    let resp = {
+        isError: false,
+        data: null
     };
 
+    try{
+        resp.data = JSON.parse(value);
+    }catch (e) {
+        resp.isError = true;
+    }
+
+    return resp;
+};
+
+const cardBodyStyle = {
+    padding: 0
+};
+
+export default class Editor extends PureComponent{
+    state = {
+        data: null,
+    };
+
+    updateData = (data) => this.setState({data: null}, () => this.setState({data}))
+
     render(){
-        let {schema, UISchema: uiSchema, formData} = style;
-
-        formData = schema ? formData : {};
-        schema = schema || {};
-        uiSchema = uiSchema || {};
-
-        // console.log("schema->", schema);
-        // console.log("uiSchema->", uiSchema);
-        // console.log("formData->", formData);
-
+        let {data} = this.state;
         return (
-            <JsonSchemaForm
-                // ArrayFieldTemplate={ArrayFieldTemplate}
-                // ObjectFieldTemplate={ObjectFieldTemplate}
-                // FieldTemplate={FieldTemplate}
-                liveValidate={true}
-                schema={schema}
-                uiSchema={uiSchema}
-                fields={{
-                    // resourceFile: ResourceFileField,
-                    // colorPicker: ColorPickerField,
-                    // codeEditor: CodeEditorField,
-                }}
-                formData={formData}
-                onChange={this.onFormDataChange}
-                // validate={validate}
-                // transformErrors={transformErrors}
-                onSubmit={({formData}) =>{}}
-                onBlur={(id, value) => {}}
-                onFocus={(id, value) =>{}}
-                onError={console.error}
-            />
+            <div>
+                <SelectData updateData={this.updateData}/>
+
+                { data ? <Editor1 {...data}/> : null }
+            </div>
         )
     }
 }
 
 
-const style = {
-    schema: {
-        "title": "",
-        "description": "",
-        "type": "object",
-        "required": [],
-        "properties": {
-            map:{
-                "type": "object",
-                title: "地图配置",
-                "properties": {
-                    "center": {
-                        "type": "array",
-                        "title": "中心点",
-                        "minItems": 2,
-                        "items": [
-                            {
-                                "title": "经度",
-                                "type": "number",
-                                "default": 104.223828
-                            },
-                            {
-                                "title": "纬度",
-                                "type": "number",
-                                "default": 37.972688
-                                // "default": 35.072688
-                            }
-                        ]
-                    },
-                    "zoom": {
-                        type: "number",
-                        title: "缩放等级",
-                        default: 3
-                    },
-                    "pitch": {
-                        type: "number",
-                        title: "倾斜角度",
-                        default: 70
-                        // default: 0
-                    },
-                    "bearing": {
-                        type: "number",
-                        title: "旋转角度",
-                        default: 0
-                    },
-                    "isInteractive":{
-                        type: "boolean",
-                        title: "开启交互",
-                        default: true
-                    },
-                }
-            },
-            event: {
-                "type": "object",
-                title: "事件效果",
-                properties: {
-                    supernatantColor: {
-                        type: "string",
-                        title: "省份浮层颜色",
-                        default: "#28407B"
-                    },
-                    supernatantOpacity: {
-                        type: "number",
-                        title: "省份浮层颜色透明度",
-                        default: 0.8
-                    }
-                }
-            },
-            "legend": {
-                type: "object",
-                title: "图例",
-                properties: {
-                    "position": {
-                        type: "object",
-                        title: "位置",
-                        properties: {
-                            "top": {
-                                type: "number",
-                                title: "距离头部(px)",
-                                default: 50
-                            },
-                            "left": {
-                                type: "number",
-                                title: "距离左侧(px)",
-                                default: 0
-                            },
-                        }
-                    },
-                    repaymentColor: {
-                        type: "string",
-                        title: "还款颜色",
-                        default: "#EFDE3F"
-                    },
-                    loanColor: {
-                        type: "string",
-                        title: "放款颜色",
-                        default: "#FF3649"
-                    },
-                    "circleRadius": {
-                        type: "number",
-                        title: "圆半径",
-                        default: 7
-                    },
-                    "fontSize": {
-                        type: "number",
-                        title: "字体大小",
-                        default: 14
-                    },
-                    "fontColor": {
-                        type: "string",
-                        title: "字体颜色",
-                        default: "#ffffff"
-                    },
+class Editor1 extends PureComponent{
+    state = {
+        schemaStr: JSON.stringify(this.props.schema, undefined, 4),
+        uiSchemaStr: JSON.stringify(this.props.uiSchema, undefined, 4),
+        formDataStr: JSON.stringify(this.props.formData, undefined, 4),
+        schema: this.props.schema,
+        uiSchema: this.props.uiSchema,
+        formData: this.props.formData,
+        errorFieldName: null,
+    };
 
-                }
-            },
-            "ui":{
-                type: "object",
-                title: "柱和呼吸灯",
-                properties: {
-                    "breatheDiameter": {
-                        type: "number",
-                        title: "呼吸灯直径",
-                        default: 45
-                    },
-                    "barBaseW": {
-                        type: "number",
-                        title: "柱状图基础宽度",
-                        default: 35
-                    },
-                    "barBaseH": {
-                        type: "number",
-                        title: "柱状图基础高度",
-                        default: 270
-                    },
+    onFormDataChange = ({formData}) => {
+        this.setFormData(formData);
+    };
 
-                    "isStartAnimation": {
-                        type: "boolean",
-                        title: "开启交叉动画",
-                        default: true
-                    },
-                    "animationTime": {
-                        type: "number",
-                        title: "交叉动画时间(ms)",
-                        default: 15*1000
-                    }
-                }
-            },
-            "comResource":{
-                type: "object",
-                title: "组件资源",
-                properties: {
-                    "mapFont": {
-                        type: "string",
-                        title: "地图字体位置",
-                        default: ""
-                    },
-                    "chinaMap": {
-                        type: "string",
-                        title: "地图底图",
-                        default: ""
-                    },
-                    "barLoanImg": {
-                        type: "string",
-                        title: "放款柱状图",
-                        default: ""
-                    },
-                    "barRepaymentImg": {
-                        type: "string",
-                        title: "还款柱状图",
-                        default: ""
-                    }
-                }
+    updateData = (key, value) => {
+        let keyToValue = {};
+        if(["schemaStr", "uiSchemaStr", "formDataStr"].indexOf(key) !== -1){
+            keyToValue[key] = value;
+            const {isError, data} = getJsonByStr(value);
+            if(!isError){
+                keyToValue[key.replace("Str", "")] = data;
+                keyToValue["errorFieldName"] = null;
+            }else {
+                keyToValue["errorFieldName"] = key;
             }
         }
-    },
-    UISchema: {
-        map: {
-            "ui:collapse": true,
-            "center": {
-                "ui:collapse": true
-            },
-        },
-        event: {
-            "ui:collapse": true,
-            "supernatantColor":{
-                "ui:field": "colorPicker",
-            }
-        },
-        "legend":{
-            "ui:collapse": true,
-            "position":{
-                "ui:collapse": true,
-            },
-            "fontColor":{
-                "ui:field": "colorPicker",
-            },
-            "repaymentColor":{
-                "ui:field": "colorPicker",
-            },
-            "loanColor":{
-                "ui:field": "colorPicker",
-            },
-        },
-        "ui":{
-            "ui:collapse": true
-        },
-        "comResource":{
-            "ui:collapse": true
-        }
-    },
-    // 默认formData数据
-    formData: {}
-};
+        this.setState(keyToValue)
+    };
+
+    setFormData = (value) => {
+        this.setState({
+            formDataStr: JSON.stringify(value, undefined, 4),
+            formData: value
+        })
+    };
+
+    render(){
+        let {schema, uiSchema, formData, schemaStr, uiSchemaStr, formDataStr, errorFieldName} = this.state;
+
+        formData = schema ? formData : {};
+        schema = schema || {};
+        uiSchema = uiSchema || {};
+
+        const getErrorMsg = (key) => errorFieldName === key ? <span style={{color: "red"}}>格式错误</span> : "";
+
+        return (
+            <Row>
+                <Col span={14}>
+                    <Row>
+                        <Col span={24}>
+                            <Card
+                                title="schema"
+                                bodyStyle={cardBodyStyle}
+                                extra={getErrorMsg("schemaStr")}
+                            >
+                                <CodeEditor
+                                    code={schemaStr}
+                                    language="json"
+                                    onChange={(code) => this.updateData("schemaStr", code)}
+                                    height={300}
+                                    editorOpts={{fontSize: 12}}
+                                    autoFocus={true}
+                                />
+                            </Card>
+                        </Col>
+
+                        <Col span={24}>
+                            <Row>
+                                <Col span={12}>
+                                    <Card
+                                        title="uiSchema"
+                                        bodyStyle={cardBodyStyle}
+                                        extra={getErrorMsg("uiSchemaStr")}
+                                    >
+                                        <CodeEditor
+                                            code={uiSchemaStr}
+                                            language="json"
+                                            onChange={(code) => this.updateData("uiSchemaStr", code)}
+                                            height={300}
+                                            editorOpts={{fontSize: 12}}
+                                        />
+                                    </Card>
+                                </Col>
+
+                                <Col span={11} offset={1}>
+                                    <Card
+                                        title="formData"
+                                        bodyStyle={cardBodyStyle}
+                                        extra={getErrorMsg("formDataStr")}
+                                    >
+                                        <CodeEditor
+                                            code={formDataStr}
+                                            language="json"
+                                            onChange={(code) => this.updateData("formDataStr", code)}
+                                            height={300}
+                                            editorOpts={{fontSize: 12}}
+                                        />
+                                    </Card>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Col>
+
+                <Col span={10}>
+                    <JsonSchemaForm
+                        // ArrayFieldTemplate={ArrayFieldTemplate}
+                        // ObjectFieldTemplate={ObjectFieldTemplate}
+                        // FieldTemplate={FieldTemplate}
+                        liveValidate={true}
+                        schema={schema}
+                        uiSchema={uiSchema}
+                        fields={{
+                            // resourceFile: ResourceFileField,
+                            // colorPicker: ColorPickerField,
+                            // codeEditor: CodeEditorField,
+                        }}
+                        formData={formData}
+                        onChange={this.onFormDataChange}
+                        // validate={validate}
+                        // transformErrors={transformErrors}
+                        onSubmit={({formData}) =>{}}
+                        onBlur={(id, value) => {}}
+                        onFocus={(id, value) =>{}}
+                        onError={console.error}
+                    />
+                </Col>
+            </Row>
+        )
+    }
+}
+
+
+/**
+ * 选择数据
+ */
+class SelectData extends PureComponent{
+    state = {
+        selectedIdx: 0
+    };
+
+    componentDidMount() {
+        this.setData(0);
+    }
+
+    setData = (idx) => {
+        this.setState({selectedIdx: idx}, () => {
+            setTimeout(() => this.props.updateData(EnumSampleData[idx].value), 0);
+        })
+    };
+
+    render(){
+        const { selectedIdx } = this.state;
+
+        return (
+            <Button.Group>
+                {EnumSampleData.map((item, idx) => (
+                    <Button
+                        type={selectedIdx === idx ? "primary" : ""}
+                        key={item.label}
+                        onClick={() => this.setData(idx)}
+                    >
+                        {item.label}
+                    </Button>
+                ))}
+            </Button.Group>
+        )
+    }
+}
+
+
