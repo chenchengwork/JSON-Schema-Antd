@@ -1,0 +1,7 @@
+.object-field-tpl .ant-collapse > .ant-collapse-item {
+    border-bottom: 0px;
+}
+
+.object-field-tpl:last-child .ant-collapse > div:last-child {
+    border-bottom: 1px solid #d9d9d9;
+}

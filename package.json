@@ -5,6 +5,7 @@
   "description": "json schema for antd",
   "main": "lib/index",
   "scripts": {
+    "dev": "node ./devServer.js",
     "build": "rm -rf ./lib && babel src --out-dir lib && node-sass src -o lib && ./copyResource.sh",
     "publish": "npm publish --registry http://registry.npmjs.org"
   },
@@ -16,7 +17,6 @@
     "ajv": "^5.2.3",
     "growl": "^1.10.5",
     "lodash.topath": "^4.5.2",
-    "prop-types": "^15.5.8",
     "react-color": "^2.17.0",
     "setimmediate": "^1.0.5"
   },
@@ -34,8 +34,25 @@
     "@babel/plugin-syntax-import-meta": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "antd": "^3.13.6",
+    "autoprefixer": "^9.4.9",
+    "babel-loader": "^8.0.5",
     "core-js": "^2.6.5",
-    "node-sass": "^4.11.0"
+    "css-loader": "^2.1.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.11.0",
+    "postcss-flexbugs-fixes": "^4.1.0",
+    "postcss-loader": "^3.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.29.5",
+    "webpack-dev-server": "^3.2.1"
   },
   "repository": {
     "type": "git",
