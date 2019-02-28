@@ -1,6 +1,7 @@
 /**
  * @description webpack 基础配置配置
  */
+const path = require("path");
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -225,7 +226,8 @@ const webpackConf = {
     },
 
     output: {
-        filename: '[name].js'
+        filename: '[name].js',
+        path: path.resolve(__dirname, "playground/build")
     },
 
     module: {

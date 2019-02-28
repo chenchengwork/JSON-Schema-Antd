@@ -60,8 +60,6 @@ export default class Index extends PureComponent{
 
     updateData = (data) => this.setState({data: null}, () => this.setState({data}))
 
-
-
     render(){
         let {data} = this.state;
 
@@ -226,7 +224,7 @@ class SelectData extends PureComponent{
 
     setData = (idx) => {
         this.setState({selectedIdx: idx}, () => {
-            setTimeout(() => this.props.updateData(EnumSampleData[idx].value), 0);
+             this.props.updateData(EnumSampleData[idx].value)
         })
     };
 

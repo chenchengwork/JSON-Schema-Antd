@@ -6,6 +6,7 @@
   "main": "lib/index",
   "scripts": {
     "dev": "node ./devServer.js",
+    "build:playground": "node ./buildPlayground.js",
     "build": "rm -rf ./lib && babel src --out-dir lib && node-sass src -o lib && ./copyResource.sh",
     "publish": "npm publish --registry http://registry.npmjs.org"
   },
@@ -37,6 +38,7 @@
     "antd": "^3.13.6",
     "autoprefixer": "^9.4.9",
     "babel-loader": "^8.0.5",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "core-js": "^2.6.5",
     "css-loader": "^2.1.0",
     "less": "^2.7.2",
