@@ -50,27 +50,35 @@ const cardBodyStyle = {
     padding: 0
 };
 
-export default class Editor extends PureComponent{
+export default class Index extends PureComponent{
     state = {
         data: null,
+        editorData: {
+
+        }
     };
 
     updateData = (data) => this.setState({data: null}, () => this.setState({data}))
 
+
+
     render(){
         let {data} = this.state;
+
         return (
             <div>
                 <SelectData updateData={this.updateData}/>
 
-                { data ? <Editor1 {...data}/> : null }
+                { data ? <Editor {...data}/> : null }
             </div>
         )
     }
 }
 
-
-class Editor1 extends PureComponent{
+/**
+ * 编辑器
+ */
+class Editor extends PureComponent{
     state = {
         schemaStr: JSON.stringify(this.props.schema, undefined, 4),
         uiSchemaStr: JSON.stringify(this.props.uiSchema, undefined, 4),
