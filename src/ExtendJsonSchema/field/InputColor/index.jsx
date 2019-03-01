@@ -33,7 +33,7 @@ export default class InputColor extends PureComponent{
                     style={{
                         display: 'block',
                         position: "absolute",
-                        top: clientY + 80,
+                        top: clientY + 20,
                         right: window.innerWidth - clientX,
                         zIndex: 1000000
                     }}
