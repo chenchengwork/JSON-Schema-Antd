@@ -9,7 +9,11 @@ import { Card, Row, Col, Button } from 'antd'
 
 const EnumSampleData = [
     {
-        label: "myString",
+        label: "数组",
+        value: require("./samples/myArray")
+    },
+    {
+        label: "字符串",
         value: require("./samples/myString")
     },
     {
@@ -90,6 +94,9 @@ class Editor extends PureComponent{
         formData: this.props.formData,
         errorFieldName: null,
     };
+    componentDidCatch(error, errorInfo) {
+        console.error(error);
+    }
 
     onFormDataChange = ({formData}) => {
         this.setFormData(formData);
@@ -237,7 +244,7 @@ class SelectData extends PureComponent{
         const { selectedIdx } = this.state;
 
         return (
-            <Button.Group>
+            <Button.Group style={{margin: 10}}>
                 {EnumSampleData.map((item, idx) => (
                     <Button
                         type={selectedIdx === idx ? "primary" : ""}

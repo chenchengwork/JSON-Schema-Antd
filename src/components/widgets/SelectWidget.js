@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import {asNumber} from "../../utils";
 import { Select } from 'antd';
+
 /**
  * This is a silly limitation in the DOM where option change event values are
  * always retrieved as strings.

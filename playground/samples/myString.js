@@ -1,6 +1,6 @@
 module.exports = {
     schema: {
-        "title": "",
+        "title": "常用字符串描述",
         "description": "",
         "type": "object",
         "required": [],
@@ -29,17 +29,41 @@ module.exports = {
                 format: "color",
                 default: "#ccc"
             },
-            color1: {
+            select: {
                 type: "string",
-                title: "color类型-ui",
-                default: "#ccc"
+                title: "select类型",
+                enum: [
+                    "10",
+                    "20",
+                    "30"
+                ],
+                enumNames: ["age1", "age2", "age3"],
+                format: "select",
+                default: "10"
             },
-
+            textarea: {
+                type: "string",
+                title: "textarea类型",
+                format: "textarea",
+                default: "test textarea"
+            },
+            radio: {
+                type: "string",
+                title: "radio类型",
+                enum: [
+                    "10",
+                    "20",
+                    "30"
+                ],
+                enumNames: ["age1", "age2", "age3"],
+                format: "radio",
+                default: "10"
+            },
         }
     },
     uiSchema: {
-        color1: {
-            "ui:field": "colorPicker"
+        textarea: {
+            "ui:rows": 4
         }
     },
     // 默认formData数据

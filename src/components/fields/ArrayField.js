@@ -180,13 +180,16 @@ class ArrayField extends Component {
         }
 
         if (isFixedItems(schema)) {
+            // console.log("isFixedItems")
             return this.renderFixedArray();
         } else if (isFilesArray(schema, uiSchema, definitions)) {
+            // console.log("isFilesArray")
             return this.renderFiles();
         } else if (isMultiSelect(schema, definitions)) {
+            // console.log("isMultiSelect")
             return this.renderMultiSelect();
         }
-
+        // console.log("renderNormalArray")
         return this.renderNormalArray();
     }
 
@@ -362,6 +365,7 @@ class ArrayField extends Component {
             onFocus,
             rawErrors,
         } = this.props;
+
         const title = schema.title || name;
         let items = this.props.formData;
         const {ArrayFieldTemplate, definitions, fields, formContext} = registry;

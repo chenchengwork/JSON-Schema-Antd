@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
-import { Form } from 'antd';
-const FormItem = Form.Item;
+import React from "react";
+import { Row, Col } from 'antd';
 
 /**
  * 默认字段模板
@@ -27,38 +26,24 @@ export default function DefaultFieldTemplate(props) {
         return children;
     }
 
-    const formItemLayout = {
-        labelCol: {
-            // xs: { span: 24 },
-            // sm: { span: 8 },
-            // md: { span: 4},
-        },
-        wrapperCol: {
-            // xs: { span: 24 },
-            // sm: { span: 16 },
-            // md: { span: 20},
-        },
-    };
-    // console.log("required:", label, required)
-    return displayLabel ? (
-        <FormItem
+    return displayLabel? (
+        <Row
             className={classNames}
-            style={{margin: 0}}
-            {...formItemLayout}
-            colon={true}            // 是否显示冒号
-            required={required}
-            label={displayLabel && <span id={id}>{label}</span>}
-            validateStatus={Array.isArray(rawErrors) && rawErrors.length > 0 ? "error" : "success"}
-            extra={
-                <Fragment>
-                    <div>{errors}</div>
-                    <div>{description}</div>
-                    <div>{help}</div>
-                </Fragment>
-            }
+            style={{marginBottom: 10}}
         >
-            {children}
-        </FormItem>
+            <Col span={24}>
+                { required && label ? <span style={{color: "red"}}>*</span> : null}
+                <span id={id}>
+                    {label}
+                </span>
+            </Col>
+            <Col span={24}>
+                {children}
+            </Col>
+            { Array.isArray(rawErrors) && rawErrors.length > 0 ? <Col span={24}><span style={{color: "red"}}>{errors}</span></Col>: null}
+            <Col span={24}><span style={{color: "rgba(0,0,0,0.5)"}}>{description}</span></Col>
+            <Col span={24}><span style={{color: "rgba(0,0,0,0.5)"}}>{help}</span></Col>
+        </Row>
     ) : children;
 }
 

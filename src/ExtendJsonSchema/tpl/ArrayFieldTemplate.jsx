@@ -101,12 +101,9 @@ function DefaultArrayItem(props) {
  * @constructor
  */
 export default function DefaultNormalArrayFieldTemplate(props) {
-    // console.log(props)
     const { uiSchema, schema } = props;
 
-    // console.log("uiSchema", uiSchema)
-
-    return uiSchema["ui:collapse"] ?
+    return uiSchema["ui:collapse"] ?(
         <Collapse accordion bordered={false}>
             <Panel
                 header={
@@ -127,7 +124,8 @@ export default function DefaultNormalArrayFieldTemplate(props) {
                 <span>{props.description}</span>
                 {props.items && props.items.map((p, index) => <Fragment key={index}>{p.children}</Fragment>)}
             </Panel>
-        </Collapse> : (
+        </Collapse>
+        ): (
             <fieldset className={props.className}>
                 <ArrayFieldTitle
                     key={`array-field-title-${props.idSchema.$id}`}
@@ -162,41 +160,4 @@ export default function DefaultNormalArrayFieldTemplate(props) {
                 )}
             </fieldset>
         );
-
-
-    return (
-        <fieldset className={props.className}>
-            <ArrayFieldTitle
-                key={`array-field-title-${props.idSchema.$id}`}
-                TitleField={props.TitleField}
-                idSchema={props.idSchema}
-                title={props.uiSchema["ui:title"] || props.title}
-                required={props.required}
-            />
-
-            {(props.uiSchema["ui:description"] || props.schema.description) && (
-                <ArrayFieldDescription
-                    key={`array-field-description-${props.idSchema.$id}`}
-                    DescriptionField={props.DescriptionField}
-                    idSchema={props.idSchema}
-                    description={
-                        props.uiSchema["ui:description"] || props.schema.description
-                    }
-                />
-            )}
-
-            <div
-                className="row array-item-list"
-                key={`array-item-list-${props.idSchema.$id}`}>
-                {props.items && props.items.map(p => DefaultArrayItem(p))}
-            </div>
-
-            {props.canAdd && (
-                <AddButton
-                    onClick={props.onAddClick}
-                    disabled={props.disabled || props.readonly}
-                />
-            )}
-        </fieldset>
-    );
 }

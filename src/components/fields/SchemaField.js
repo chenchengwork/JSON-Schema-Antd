@@ -136,9 +136,7 @@ function SchemaFieldRender(props) {
     const uiOptions = getUiOptions(uiSchema);
     let {label: displayLabel = true} = uiOptions;
     if (schema.type === "array") {
-        displayLabel =
-            isMultiSelect(schema, definitions) ||
-            isFilesArray(schema, uiSchema, definitions);
+        displayLabel = isMultiSelect(schema, definitions) || isFilesArray(schema, uiSchema, definitions);
     }
     if (schema.type === "object") {
         displayLabel = false;

@@ -35,6 +35,10 @@ export default class Form extends Component {
         this.state = this.getStateFromProps(props);
     }
 
+    componentDidCatch(error, errorInfo) {
+        console.error(error);
+    }
+
     componentWillReceiveProps(nextProps) {
         this.setState(this.getStateFromProps(nextProps));
     }
@@ -189,7 +193,7 @@ export default class Form extends Component {
             widgets: {...widgets, ...this.props.widgets},
             ArrayFieldTemplate: this.props.ArrayFieldTemplate || extendTpl.ArrayFieldTemplate,
             ObjectFieldTemplate: this.props.ObjectFieldTemplate || extendTpl.ObjectFieldTemplate,
-            FieldTemplate: this.props.FieldTemplate || extendTpl.FieldTemplate,
+            FieldTemplate: this.props.FieldTemplate,
             definitions: this.props.schema.definitions || {},
             formContext: this.props.formContext || {},
         };
