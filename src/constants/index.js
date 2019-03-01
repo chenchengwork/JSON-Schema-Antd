@@ -10,45 +10,54 @@ export const widgetMap = {
         hidden: "HiddenWidget",
     },
     string: {
+        // 已确认的类型
         text: "TextWidget",
         password: "PasswordWidget",
         email: "EmailWidget",
-        hostname: "TextWidget",
-        ipv4: "TextWidget",
-        ipv6: "TextWidget",
-        uri: "URLWidget",
-        "data-url": "FileWidget",
         radio: "RadioWidget",
         select: "SelectWidget",
         textarea: "TextareaWidget",
+        color: "ColorWidget",
         hidden: "HiddenWidget",
+        hostname: "TextWidget",
+        ipv4: "TextWidget",
+        ipv6: "TextWidget",
+
+        // 未确认的类型
+        uri: "URLWidget",
+        "data-url": "FileWidget",
         date: "DateWidget",
         datetime: "DateTimeWidget",
         "date-time": "DateTimeWidget",
         "alt-date": "AltDateWidget",
         "alt-datetime": "AltDateTimeWidget",
-        color: "ColorWidget",
         file: "FileWidget",
     },
     number: {
+        // 已确认的类型
         text: "TextWidget",
         select: "SelectWidget",
-        updown: "UpDownWidget",
         range: "RangeWidget",
-        radio: "RadioWidget",
+
+        // 未确认的类型
+        // radio: "RadioWidget",
         hidden: "HiddenWidget",
+        updown: "UpDownWidget",
     },
     integer: {
         text: "TextWidget",
         select: "SelectWidget",
-        updown: "UpDownWidget",
         range: "RangeWidget",
-        radio: "RadioWidget",
+
+        // radio: "RadioWidget",
+        updown: "UpDownWidget",
         hidden: "HiddenWidget",
     },
     array: {
         select: "SelectWidget",
         checkboxes: "CheckboxesWidget",
+
+        // 未确认的类型
         files: "FileWidget",
     },
 };

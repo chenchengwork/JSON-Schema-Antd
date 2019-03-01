@@ -9,10 +9,15 @@ function RangeWidget(props) {
         value,
         disabled,
         onChange,
-        registry: {
-            widgets: {BaseInput},
-        },
+        // registry: {
+        //     widgets: {BaseInput},
+        // },
     } = props;
+    const {max, min, step} = rangeSpec(schema);
+    const marks = {};
+    for(let i = min; i <= max; i+=step){
+        marks[i] = i;
+    }
 
     return (
         <Slider
@@ -21,7 +26,8 @@ function RangeWidget(props) {
             onChange={(value) => {
                 onChange(value);
             }}
-            {...rangeSpec(schema)}
+            marks={marks}
+            {...{max, min, step}}
         />
     );
 }

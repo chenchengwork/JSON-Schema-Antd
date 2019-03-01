@@ -40,16 +40,6 @@ function CheckboxesWidget(props) {
         );
 
         return checkbox;
-
-        // return inline ? (
-        //     <label key={index} className={`checkbox-inline ${disabledCls}`}>
-        //         {checkbox}
-        //     </label>
-        // ) : (
-        //     <div key={index} className={`checkbox ${disabledCls}`}>
-        //         <label>{checkbox}</label>
-        //     </div>
-        // );
     }) : null;
 }
 

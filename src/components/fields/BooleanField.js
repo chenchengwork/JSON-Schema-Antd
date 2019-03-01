@@ -23,9 +23,11 @@ function BooleanField(props) {
         onChange,
         rawErrors,
     } = props;
-    const {title} = schema;
+    const {title, format} = schema;
     const {widgets, formContext} = registry;
-    const {widget = "checkbox", ...options} = getUiOptions(uiSchema);
+    const defaultWidget = format || (enumOptions ? "select" : "checkbox");
+    const {widget = defaultWidget, ...options} = getUiOptions(uiSchema);
+
     const Widget = getWidget(schema, widget, widgets);
     const enumOptions = optionsList({
         enum: [true, false],

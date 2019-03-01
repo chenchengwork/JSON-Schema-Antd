@@ -9,28 +9,28 @@ import { Card, Row, Col, Button } from 'antd'
 
 const EnumSampleData = [
     {
-        label: "数组",
-        value: require("./samples/myArray")
-    },
-    {
         label: "字符串",
-        value: require("./samples/myString")
+        value: require("./samples/string")
     },
     {
-        label: "mySample",
-        value: require("./samples/mySample")
+        label: "数值",
+        value: require("./samples/number")
     },
     {
-        label: "Sample",
-        value: require("./samples/sample")
+        label: "整型",
+        value: require("./samples/integer")
     },
     {
-        label: "Nested",
-        value: require("./samples/nested")
+        label: "布尔",
+        value: require("./samples/boolean")
     },
     {
-        label: "Arrays",
-        value: require("./samples/arrays")
+        label: "对象",
+        value: require("./samples/object")
+    },
+    {
+        label: "数组",
+        value: require("./samples/array")
     },
 ];
 

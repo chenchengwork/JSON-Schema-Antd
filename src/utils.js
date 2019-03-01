@@ -318,6 +318,7 @@ export function isMultiSelect(schema, definitions = {}) {
     if (!schema.uniqueItems || !schema.items) {
         return false;
     }
+
     return isSelect(schema.items, definitions);
 }
 

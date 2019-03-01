@@ -284,7 +284,9 @@ class ArrayField extends Component {
         const {widgets, definitions, formContext} = registry;
         const itemsSchema = retrieveSchema(schema.items, definitions, formData);
         const enumOptions = optionsList(itemsSchema);
-        const {widget = "select", ...options} = {
+        const {title, format} = schema;
+        const defaultWidget = format || "select";
+        const {widget = defaultWidget, ...options} = {
             ...getUiOptions(uiSchema),
             enumOptions,
         };

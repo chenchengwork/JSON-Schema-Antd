@@ -59,6 +59,7 @@ function SelectWidget(props) {
     return (
         <Select
             id={id}
+            style={{width: "100%"}}
             mode={multiple && "multiple"}
             value={typeof value === "undefined" ? emptyValue : Array.isArray(value) ? value : value.toString()}
             disabled={disabled || readonly}

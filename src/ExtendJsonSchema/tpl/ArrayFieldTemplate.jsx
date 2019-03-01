@@ -11,18 +11,6 @@ function IconBtn(props) {
     return <Button type={type} icon={icon} className={className} {...otherProps}>{children}</Button>
 }
 
-function AddButton({onClick, disabled}) {
-    return (
-        <IconBtn
-            icon="plus"
-            className="btn-add col-xs-12"
-            tabIndex="0"
-            onClick={onClick}
-            disabled={disabled}
-        >增加</IconBtn>
-    )
-}
-
 function ArrayFieldTitle({TitleField, idSchema, title, required}) {
     if (!title) {
         // See #312: Ensure compatibility with old versions of React.
@@ -45,16 +33,25 @@ function ArrayFieldDescription({DescriptionField, idSchema, description}) {
 function DefaultArrayItem(props) {
     const btnStyle = {};
 
+    const {hasToolbar, hasMoveUp, hasMoveDown, hasRemove} = props;
+    let toolBarNum = 0;
+    let toolSpan = 0;
+    if(hasToolbar) {
+        [hasMoveUp || hasMoveDown, hasMoveUp || hasMoveDown, hasRemove].forEach(item => item && toolBarNum++);
+        toolSpan = toolBarNum + 3;
+    }
+
+
     return (
         <Row key={props.index} className={props.className} gutter={5}>
-            <Col span={props.hasToolbar ? 11 : 24}>
+            <Col span={hasToolbar ? 24 - toolSpan : 24}>
                 {props.children}
             </Col>
 
             {props.hasToolbar && (
-                <Col span={13}>
+                <Col span={toolSpan}>
                     <Button.Group>
-                        {(props.hasMoveUp || props.hasMoveDown) && (
+                        {(hasMoveUp || hasMoveDown) && (
                             <IconBtn
                                 icon="arrow-up"
                                 className="array-item-move-up"
@@ -62,10 +59,11 @@ function DefaultArrayItem(props) {
                                 style={btnStyle}
                                 disabled={props.disabled || props.readonly || !props.hasMoveUp}
                                 onClick={props.onReorderClick(props.index, props.index - 1)}
-                            >上移</IconBtn>
+                                title={"上移"}
+                            />
                         )}
 
-                        {(props.hasMoveUp || props.hasMoveDown) && (
+                        {(hasMoveUp || hasMoveDown) && (
                             <IconBtn
                                 icon="arrow-down"
                                 className="array-item-move-down"
@@ -73,10 +71,11 @@ function DefaultArrayItem(props) {
                                 style={btnStyle}
                                 disabled={ props.disabled || props.readonly || !props.hasMoveDown }
                                 onClick={props.onReorderClick(props.index, props.index + 1)}
-                            >下移</IconBtn>
+                                title={"下移"}
+                            />
                         )}
 
-                        {props.hasRemove && (
+                        {hasRemove && (
                             <IconBtn
                                 type="danger"
                                 icon="delete"
@@ -85,7 +84,8 @@ function DefaultArrayItem(props) {
                                 style={btnStyle}
                                 disabled={props.disabled || props.readonly}
                                 onClick={props.onDropIndexClick(props.index)}
-                            >删除</IconBtn>
+                                title="删除"
+                            />
                         )}
                     </Button.Group>
                 </Col>
@@ -109,7 +109,7 @@ export default function DefaultNormalArrayFieldTemplate(props) {
                 header={
                     <div>
                         {uiSchema["ui:title"] || props.title}
-                        {uiSchema["ui:addIcon"] ? <Icon
+                        {uiSchema["ui:addIcon"] || props.canAdd ? <Icon
                             onClick={(e) => {
                                 props.onAddClick(e);
                                 e.stopPropagation();
@@ -122,18 +122,30 @@ export default function DefaultNormalArrayFieldTemplate(props) {
                 }
             >
                 <span>{props.description}</span>
-                {props.items && props.items.map((p, index) => <Fragment key={index}>{p.children}</Fragment>)}
+                {/*{props.items && props.items.map((p, index) => <Fragment key={index}>{p.children}</Fragment>)}*/}
+                {props.items && props.items.map((p) =>  DefaultArrayItem(p))}
             </Panel>
         </Collapse>
         ): (
             <fieldset className={props.className}>
-                <ArrayFieldTitle
-                    key={`array-field-title-${props.idSchema.$id}`}
-                    TitleField={props.TitleField}
-                    idSchema={props.idSchema}
-                    title={props.uiSchema["ui:title"] || props.title}
-                    required={props.required}
-                />
+                <div style={{display: "flex", justifyContent: "space-between"}}>
+                    <ArrayFieldTitle
+                        key={`array-field-title-${props.idSchema.$id}`}
+                        TitleField={props.TitleField}
+                        idSchema={props.idSchema}
+                        title={props.uiSchema["ui:title"] || props.title}
+                        required={props.required}
+                    />
+                    {props.canAdd && (
+                        <IconBtn
+                            icon="plus"
+                            onClick={props.onAddClick}
+                            disabled={props.disabled || props.readonly}
+                            style={{marginLeft: 20}}
+                            title="添加"
+                        />
+                    )}
+                </div>
 
                 {(props.uiSchema["ui:description"] || props.schema.description) && (
                     <ArrayFieldDescription
@@ -151,13 +163,6 @@ export default function DefaultNormalArrayFieldTemplate(props) {
                     key={`array-item-list-${props.idSchema.$id}`}>
                     {props.items && props.items.map(p => DefaultArrayItem(p))}
                 </div>
-
-                {props.canAdd && (
-                    <AddButton
-                        onClick={props.onAddClick}
-                        disabled={props.disabled || props.readonly}
-                    />
-                )}
             </fieldset>
         );
 }
