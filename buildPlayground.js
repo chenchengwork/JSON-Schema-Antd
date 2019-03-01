@@ -1,13 +1,13 @@
 process.env.NODE_ENV = 'production';
 process.env.BABEL_ENV = 'production';
 const webpack = require("webpack");
-const config = require("./webpack.config");
-
-const path = require("path");
-config.devtool = false;
-config.mode = "production";
-config.output.path = path.resolve(__dirname, "playground/build");
-config.optimization.minimize = true;
+const config = require("./webpack.config.prod");
+//
+// const path = require("path");
+// config.devtool = false;
+// config.mode = "production";
+// config.output.path = path.resolve(__dirname, "playground/build");
+// config.optimization.minimize = true;
 
 webpack(config, (err, stats) => {
     let jsonStats = stats.toJson();
