@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import { shouldRender } from "../../utils";
+import { shouldRender } from "../../../utils";
 import InputColor from './InputColor';
 
 class ColorPicker extends Component {
@@ -13,11 +13,11 @@ class ColorPicker extends Component {
     }
 
     render() {
-        const {multiple, id, readonly, disabled, formData} = this.props;
+        const {multiple, id, readonly, disabled, value} = this.props;
 
         return (
             <InputColor
-                color={formData}
+                color={value}
                 onChange={(currentColor) => {
                     this.props.onChange(currentColor)
                 }}

@@ -9,6 +9,10 @@ import { Card, Row, Col, Button } from 'antd'
 
 const EnumSampleData = [
     {
+        label: "myString",
+        value: require("./samples/myString")
+    },
+    {
         label: "mySample",
         value: require("./samples/mySample")
     },
@@ -187,6 +191,7 @@ class Editor extends PureComponent{
                         // ObjectFieldTemplate={ObjectFieldTemplate}
                         // FieldTemplate={FieldTemplate}
                         liveValidate={true}
+                        mustValidate={true}
                         schema={schema}
                         uiSchema={uiSchema}
                         fields={{

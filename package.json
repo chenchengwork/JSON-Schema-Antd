@@ -15,7 +15,7 @@
     "antd": ">=3.0"
   },
   "dependencies": {
-    "ajv": "^5.2.3",
+    "ajv": "^6.9.2",
     "growl": "^1.10.5",
     "lodash.topath": "^4.5.2",
     "react-color": "^2.17.0",

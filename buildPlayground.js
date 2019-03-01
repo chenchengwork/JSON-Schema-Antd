@@ -2,12 +2,6 @@ process.env.NODE_ENV = 'production';
 process.env.BABEL_ENV = 'production';
 const webpack = require("webpack");
 const config = require("./webpack.config.prod");
-//
-// const path = require("path");
-// config.devtool = false;
-// config.mode = "production";
-// config.output.path = path.resolve(__dirname, "playground/build");
-// config.optimization.minimize = true;
 
 webpack(config, (err, stats) => {
     let jsonStats = stats.toJson();
@@ -20,5 +14,6 @@ webpack(config, (err, stats) => {
         console.log("---------warning-----------")
         jsonStats.warnings.forEach((msg) => console.error(msg));
     }
+
     console.log("打包完成")
 });
