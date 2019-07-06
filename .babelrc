@@ -14,7 +14,7 @@
         ]
       },
       "modules": false,
-      "useBuiltIns": "usage",
+      "useBuiltIns": false,
       "debug": false
     }],
     "@babel/preset-react"
